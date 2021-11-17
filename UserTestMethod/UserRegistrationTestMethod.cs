@@ -4,7 +4,7 @@ namespace UserRegistration
 {
     [TestClass]
     public class UserRegistrationTestMethod
-    {     
+    {
         //First Name valid or not
         [TestMethod]
         public void TestingFirstNameValid()
@@ -14,7 +14,7 @@ namespace UserRegistration
             string expected = "valid";
             string actual;
             //Act
-             actual = RegexValidate.FirstName(fname);         
+            actual = RegexValidate.FirstName(fname);
             //Assert
             Assert.AreEqual(expected, actual);
         }
@@ -157,11 +157,13 @@ namespace UserRegistration
             string expected = "invalid";
 
             //Act
-            string actual =RegexValidate.EmailValid(name);
+            string actual = RegexValidate.EmailValid(name);
 
             //Assert
             Assert.AreEqual(expected, actual);
         }
-    }
+
+    }    
 }
+
 
