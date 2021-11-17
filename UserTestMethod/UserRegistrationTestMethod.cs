@@ -9,6 +9,7 @@ namespace UserRegistration
         [TestMethod]
         public void TestingFirstNameValid()
         {
+
             //Arrange
             string fname = "Mau";
             string expected = "valid";
@@ -22,14 +23,44 @@ namespace UserRegistration
         [TestMethod]
         public void TestingFirstNameInvalid()
         {
-            //Arrange
-            string fname = "Mayuri";
-            string expected = "invalid";
-            string actual;
-            //Act
-            actual = RegexValidate.FirstName(fname);
-            //Assert
-            Assert.AreEqual(expected, actual);
+            try
+            {
+                //Arrange
+                string fname = "mayuriss";
+                string expected = "invalid";
+                string actual;
+                //Act
+                actual = RegexValidate.FirstName(fname);
+                //Assert
+                Assert.AreEqual(expected, actual);
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("invalid", e.Message);
+            }
+        }
+        [TestMethod]
+        //The following test case should return Invalid  as entry is null
+        public void TestFirstName_NullException()
+        {
+            string fname = null;
+            try
+            {
+                //Arrange
+
+                string expected = "Invalid";                       //this returns invalid since the minimum letter in first name should be 3
+
+                //Act
+                string reg = RegexValidate.FirstName(fname);          //since sstatic methods so no need of class obj creation
+
+                //Assert
+                expected.Equals(reg);
+
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("Entry cannot be null", e.Message);
+            }
         }
 
         //Last Name valid or not
@@ -48,14 +79,44 @@ namespace UserRegistration
         [TestMethod]
         public void TestingLastNameInvalid()
         {
-            //Arrange
-            string fname = "Salunkhe";
-            string expected = "invalid";
-            string actual;
-            //Act
-            actual = RegexValidate.LastName(fname);
-            //Assert
-            Assert.AreEqual(expected, actual);
+            try
+            {
+                //Arrange
+                string fname = "salunkhe";
+                string expected = "invalid";
+                string actual;
+                //Act
+                actual = RegexValidate.LastName(fname);
+                //Assert
+                Assert.AreEqual(expected, actual);
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("invalid", e.Message);
+            }
+        }
+        [TestMethod]
+        //The following test case should return excepiton as argument null
+        public void TestLastName_NullExeption()
+        {
+            try
+            {
+                //Arrange
+                string name = null;                 //This returns invalid as the first letter is not capital
+                string expected = "Invalid";
+
+                //Act
+                string reg = RegexValidate.LastName(name);
+
+                //Assert
+                Assert.AreEqual(expected, reg);
+
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("Entry cannot be null", e.Message);
+            }
+
         }
 
         //phone no valid or not
@@ -74,14 +135,44 @@ namespace UserRegistration
         [TestMethod]
         public void MobileNumInValid()
         {
-            //Arrange
-            string fname = "198818158151";
-            string expected = "invalid";
-            string actual;
-            //Act
-            actual = RegexValidate.MobileNumValid(fname);
-            //Assert
-            Assert.AreEqual(expected, actual);
+            try
+            {
+                //Arrange
+                string fname = "198818158151";
+                string expected = "invalid";
+                string actual;
+                //Act
+                actual = RegexValidate.MobileNumValid(fname);
+                //Assert
+                Assert.AreEqual(expected, actual);
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("invalid", e.Message);
+            }
+        }
+        [TestMethod]
+
+        //The following test case should return null exception
+        public void TestPhoneNumber_NullException()
+        {
+            try
+            {
+                //Arrange
+                string name = null;                    //since there is no country code
+                string expected = "Invalid";
+
+                //Act
+                string reg = RegexValidate.MobileNumValid(name);
+
+                //Assert
+                Assert.AreEqual(expected, reg);
+            }
+            catch (CustomException e)                          //Argument null exception
+            {
+                Assert.AreEqual("Entry cannot be null", e.Message);
+            }
+
         }
 
         //Fpassword valid or not
@@ -100,14 +191,42 @@ namespace UserRegistration
         [TestMethod]
         public void InValidpassword()
         {
-            //Arrange
-            string fname = "ancvbnmmk@";
-            string expected = "invalid";
-            string actual;
-            //Act
-            actual = RegexValidate.PassWord(fname);
-            //Assert
-            Assert.AreEqual(expected, actual);
+            try
+            {
+                //Arrange
+                string fname = "ancvbnmmk@";
+                string expected = "invalid";
+                string actual;
+                //Act
+                actual = RegexValidate.PassWord(fname);
+                //Assert
+                Assert.AreEqual(expected, actual);
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("invalid", e.Message);
+            }
+        }
+        public void TestPassword_NullException()
+        {
+            try
+            {
+                //Arrange
+                string name = null;                     //Missing atleast one number, and special character
+                string expected = "Invalid";
+
+                //Act
+                string reg = RegexValidate.PassWord(name);
+
+                //Assert
+                Assert.AreEqual(expected, reg);
+
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("Entry cannot be null", e.Message);
+            }
+
         }
 
         [TestMethod]
@@ -153,14 +272,35 @@ namespace UserRegistration
 
         public void Testemail_Invalid(string name)
         {
-            //Arrange
-            string expected = "invalid";
+            try
+            {
+                //Arrange
+                string expected = "invalid";
 
-            //Act
-            string actual = RegexValidate.EmailValid(name);
+                //Act
+                string actual = RegexValidate.EmailValid(name);
 
-            //Assert
-            Assert.AreEqual(expected, actual);
+                //Assert
+                Assert.AreEqual(expected, actual);
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("invalid", e.Message);
+            }
+        }
+        [TestMethod]
+        public void TestEmail_NullException()                   //argument null excewption
+        {
+            try
+            {
+                string email = null;
+                string reg = RegexValidate.EmailValid(email);
+                Assert.AreEqual("Valid", reg);
+            }
+            catch (CustomException e)
+            {
+                Assert.AreEqual("Entry cannot be null", e.Message);
+            }
         }
 
     }    

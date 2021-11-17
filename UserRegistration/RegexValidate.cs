@@ -25,10 +25,8 @@ namespace UserRegistration
                     return "valid";
                 }
                 else
-                {
-                    {
-                        throw new CustomException(CustomException.ExceptionType.INVALID_ENTRY, "invalid");         //throwing custom exceptions for handling invalid
-                    }
+                {               
+                   throw new CustomException(CustomException.ExceptionType.INVALID_ENTRY, "invalid");         //throwing custom exceptions for handling invalid                   
                 }
             }
             catch (ArgumentNullException)
